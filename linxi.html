@@ -8,15 +8,37 @@
     <link rel="stylesheet" href="" />
     <script src=""></script>
   </head>
-  <style></style>
+  <style>
+    #box {
+      width: 500px;
+      height: 500px;
+      background: #f45fff;
+      display: none;
+    }
+    li {
+      list-style: none;
+      width: 50px;
+      height: 80px;
+      background: #f45fff;
+      line-height: 80px;
+    }
+  </style>
   <body>
-    <div id="box"></div>
+    <div>
+      <div id="box"></div>
+      <ul style="display: inline-block">
+        <li><h2>名字</h2></li>
+        <li><h2>行吧</h2></li>
+      </ul>
+    </div>
   </body>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
   <script>
-    let colors = ["red", "green", "blue"];
-    let removed = colors.splice(1, 0, "yellow", "orange");
-    console.log(colors); // red,yellow,orange,green,blue
-    console.log(removed); // []
+    $("ul li").mouseover(function () {
+      $("#box").css("display", "block");
+    });
+    $("ul li").mouseout(function () {
+      $("#box").css("display", "none");
+    });
   </script>
 </html>
