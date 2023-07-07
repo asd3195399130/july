@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style></style>
+  <body>
+    <div id="box">
+      <audio controls loop>
+        <source src="./MP3/广播提示音_爱给网_aigei_com.mp3" />
+      </audio>
+      <video width="420px" height="300px" controls id="videol" autoplay>
+        <source
+          id="mp4_src"
+          sizes=""
+          src="./MP4/熊出没之夏日连连看 第01话 270P(流畅).mp4"
+          type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+        />
+        <source src="" />
+        <source
+          id="ogg_src"
+          src="./MP4/熊出没之夏日连连看 第01话 270P(流畅) - 副本.ogg"
+          type="video/ogg" />
+      </video>
+      <button onclick="setPlaySpeed()" type="button">设置视频慢速播放</button>
+      <button onclick="hasVidEnded()" type="button">
+        检查视频播放是否已结束
+      </button>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script>
+    var vid = document.getElementById("videol");
+
+    // 设置视频播放速度为 0.3 (慢速)
+    function setPlaySpeed() {
+      vid.playbackRate = 0.5;
+    }
+
+    // 为 &lt;video&gt; 添加 ratechange 事件，在视频的播放速度发送改变时执行函数，函数将弹出提示文本信息。
+    vid.onratechange = function () {
+      myFunction();
+    };
+
+    function myFunction() {
+      alert("onratechange 事件触发 - 视频播放速度已改变");
+    }
+    var myVid = document.getElementById("video1");
+    function hasVidEnded() {
+      alert(myVid.ended);
+    }
+  </script>
+</html>
