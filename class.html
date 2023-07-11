@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style></style>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script>
+    // class map {}
+
+    // console.log(new Article());
+    // let Article = class {};
+    // console.log(new map());
+    //类声明
+    // class User {
+    //   constructor(name, age, sex) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sex = sex;
+    //   }
+    // }
+    // let userobj = new User("张三", 16, "男");
+    // // userObj.show();
+    // // console.log(userobj);
+    // document.getElementById("box").innerHTML =
+    //   userobj.name + ":" + userobj.age + ":" + userobj.sex;
+    // let date = new Date();
+    // console.log(date);
+    // class User {
+    //   constructor(colout) {
+    //     this.colout = colout;
+    //   }
+    // }
+    // let userobj = new User("red");
+    // console.log(userobj);
+    // class User {
+    //   constructor(name) {
+    //     this.name = name;
+    //   }
+    //   getname() {}
+    // }
+    // console.log(User == User.prototype.constructor);
+    // function User2(name) {
+    //   this.name = name;
+    // }
+    // console.log(User2 == User2.prototype.constructor); //true
+    // console.dir(User);
+    // console.dir(User2);
+    // "use strict";
+    // x = 3.1415986535359741365698741125698521466985663244575211336955;
+    class User {
+      #data = {
+        pwd: "12346",
+      };
+      constructor(name) {
+        this.#data.name = name;
+      }
+      get name() {
+        return this.#data.name;
+      }
+      set name(value) {
+        if (value.trim() == "") throw new Error("invalid params");
+        this.#data.name = value;
+      }
+    }
+    let uname = new User("张三");
+    // uname.name = "李四";
+    console.log(uname);
+  </script>
+</html>
