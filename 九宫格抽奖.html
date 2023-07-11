@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>抽奖模拟器</title>
+    <style>
+      .luck-draw {
+        padding: 20px;
+        width: 420px;
+        height: 420px;
+        background-color: darkcyan;
+      }
+
+      .box {
+        margin: 0 40px 40px 0;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        float: left;
+        text-align: center;
+        background: #ccc;
+      }
+
+      .active {
+        background: tomato;
+        color: orange;
+      }
+
+      .start {
+        background-color: pink;
+      }
+
+      .start:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="luck-draw">
+      <div class="box ft">100元</div>
+      <div class="box ft">2元</div>
+      <div class="box ft">鸡蛋</div>
+      <div class="box ft">保时捷</div>
+      <div class="box start">开始抽奖</div>
+      <div class="box ft">900元</div>
+      <div class="box ft">矿泉水</div>
+      <div class="box ft">牛奶一箱</div>
+      <div class="box ft">谢谢惠顾</div>
+    </div>
+
+    <script>
+      /*
+        1.点击抽奖按钮, 高亮中奖的样式会循环滚动 (8个奖品div) 同时会去掉上一个高亮  
+           定义定时器
+           1.1 获取随机数 , 数组通过随机数作为索引 去访问 奖品div 
+           1.2.停止抽奖
+        2.1   先移除定时器, 清除定时器对象  */
+
+      // 1.获取开始按钮dom
+      let btn = document.querySelector(".start");
+      let boxs = document.querySelectorAll(".ft");
+      let timer = null;
+      let flag = null;
+      // 1.1 绑定点击事件
+      btn.addEventListener("click", function () {
+        // btn.innerText = '停止抽奖'
+        // if (btn.innerText === '停止抽奖') {
+        //     //结束抽奖
+        //     stop()
+        // } else {
+        //     // 开始抽奖
+        //     start()
+        // }
+        // 三元表达式写法
+        btn.innerText === "停止抽奖" ? stop() : start();
+      });
+
+      // 随机生成0到7 之前的整数, 不包含7
+      function getNum(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+      //停止抽奖方法
+      function stop() {
+        btn.innerText = "开始抽奖";
+        // 清除定时器
+        clearInterval(timer);
+        timer = null;
+      }
+      // 开始抽奖方法
+      function start() {
+        btn.innerText = "停止抽奖";
+        timer = setInterval(function () {
+          // console.log(getNum(0, 7));
+          // 判断是不是又上一次的高亮类型循环
+          if (flag !== null) {
+            boxs[flag].className = "box ft";
+          }
+          // 获取随机数作为索引
+          let index = getNum(0, 7);
+          // 通过索引随机访问 待中奖 div
+          boxs[index].className = "box ft active";
+          // 记录下上一次的类名div
+          flag = index;
+        }, 100);
+      }
+    </script>
+  </body>
+</html>
