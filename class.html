@@ -8,12 +8,80 @@
     <link rel="stylesheet" href="" />
     <script src=""></script>
   </head>
-  <style></style>
+  <style>
+    img {
+      --c: #cbe86b; /* the main color */
+      --t: 5px; /* thickness of the outline */
+
+      width: 100px; /* the image size */
+      aspect-ratio: 1; /* only square images, don't change this */
+      border-image: linear-gradient(
+          45deg,
+          color-mix(in srgb, var(--c), #000 20%) 50%,
+          color-mix(in srgb, var(--c), #000 40%) 0
+        )
+        9999/9999px/9999px;
+      clip-path: polygon(
+        0 100%,
+        0 0,
+        100% 0,
+        calc(100% + 9999px) 9999px,
+        9999px calc(100% + 9999px)
+      );
+      outline: var(--t) solid var(--c);
+      outline-offset: calc(-1 * var(--t));
+    }
+    /* div {
+      width: 1500px;
+      height: 1500px;
+      background-image: url("https://img0.baidu.com/it/u=2299932932,1221267214&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500");
+      background-size: cover;
+      position: absolute;
+    } */
+  </style>
   <body>
-    <div id="box"></div>
+    <div>
+      <img
+        src="https://img2.baidu.com/it/u=1047655291,1730710550&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500"
+        alt="" />
+    </div>
   </body>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
   <script>
+    // function interval(callback, delay = 100) {
+    //   let id = setInterval(() => callback(id), delay);
+    // }
+    // const div = document.querySelector("div");
+    // interval((timeId) => {
+    //   const left = parseInt(window.getComputedStyle(div).left);
+    //   div.style.left = left + 10 + "px";
+    //   if (left > 500) {
+    //     clearInterval(timeId);
+    //     interval((timeId) => {
+    //       const width = parseInt(window.getComputedStyle(div).width);
+    //       div.style.width = width - 1 + "px";
+    //       if (width <= 0) clearInterval(timeId);
+    //     }, 10);
+    //   }
+    // }, 100);
+    // function interval(callback, delay = 200) {
+    //   let id = setInterval(() => callback(id), delay);
+    // }
+    // const div = document.querySelector("div");
+    // interval((timeId) => {
+    //   const left = parseInt(window.getComputedStyle(div).left);
+    //   div.style.left = left + 20 + "px";
+    //   if (left > 1000) {
+    //     clearInterval(timeId);
+    //     interval((timeId) => {
+    //       const width = parseInt(window.getComputedStyle(div).width);
+    //       const height = parseInt(window.getComputedStyle(div).height);
+    //       div.style.width = width + 1 + "px";
+    //       div.style.height = height + 1 + "px";
+    //       if (width <= 0) clearInterval(timeId);
+    //     }, 10);
+    //   }
+    // }, 100);
     // class map {}
 
     // console.log(new Article());
@@ -56,23 +124,38 @@
     // console.dir(User2);
     // "use strict";
     // x = 3.1415986535359741365698741125698521466985663244575211336955;
-    class User {
-      #data = {
-        pwd: "12346",
-      };
-      constructor(name) {
-        this.#data.name = name;
-      }
-      get name() {
-        return this.#data.name;
-      }
-      set name(value) {
-        if (value.trim() == "") throw new Error("invalid params");
-        this.#data.name = value;
-      }
-    }
-    let uname = new User("张三");
-    // uname.name = "李四";
-    console.log(uname);
+    // class User {
+    //   #data = {
+    //     pwd: "12346",
+    //   };
+    //   constructor(name) {
+    //     this.#data.name = name;
+    //   }
+    //   get name() {
+    //     return this.#data.name;
+    //   }
+    //   set name(value) {
+    //     if (value.trim() == "") throw new Error("invalid params");
+    //     this.#data.name = value;
+    //   }
+    // }
+    // let uname = new User("张三");
+    // // uname.name = "李四";
+    // console.log(uname);
+    // new Promise(function (reslove, reject) {
+    //   console.log(123);
+    //   reslove("你好");
+    // })
+    //   .then(function (value) {
+    //     console.log(value);
+    //     return 888;
+    //   })
+    //   .then(function (value) {
+    //     console.log(value);
+    //     throw "An error occurred";
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
   </script>
 </html>
