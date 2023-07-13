@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style>
+    div {
+      width: 500px;
+      height: 600px;
+      background: #f857a6; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to right,
+        #ff5858,
+        #f857a6,
+        #f09819,
+        #edde5d
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to right,
+        #ff5858,
+        #f857a6,
+        #f09819,
+        #edde5d
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      position: absolute;
+    }
+  </style>
+  <body>
+    <div id="box">
+      <button id="make-promise">Make a promise!</button>
+      <div id="log"></div>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script>
+    // function interval(callback, delay = 100) {
+    //   let id = setInterval(() => callback(id), delay);
+    // }
+    // const div = document.querySelector("div");
+    // interval((timeid) => {
+    //   const left = parseInt(window.getComputedStyle(div).left);
+    //   div.style.left = left + 10 + "px";
+    //   if (left > 500) {
+    //     clearInterval(timeid);
+    //     interval((timeid) => {
+    //       const width = parseInt(window.getComputedStyle(div).width);
+    //       const height = parseInt(window.getComputedStyle(div).height);
+    //       div.style.height = height - 1 + "px";
+    //       div.style.width = width - 1 + "px";
+    //       if (width <= 0 && height <= 0) clearInterval(timeid);
+    //     }, 10);
+    //   }
+    // }, 100);
+    // function loadimage(file, resolve, reject) {
+    //   const image = new Image();
+
+    //   image.onload = () => {
+    //     resolve(image);
+    //   };
+    //   image.onerror = () => {
+    //     reject(new Error("load fail"));
+    //   };
+    //   document.body.appendChild(image);
+    // }
+    // loadimage(
+    //   "https://bkimg.cdn.bcebos.com/pic/242dd42a2834349b033b13a23abc02ce36d3d53910c7?x-bce-process=image/resize,m_lfit,h_500,limit_1/format,f_auto",
+    //   (image) => {
+    //     image.style.border = "solid 5px red";
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    "use strict";
+
+    let promiseCount = 0;
+
+    function testPromise() {
+      const thisPromiseCount = ++promiseCount;
+      const log = document.getElementById("log");
+      // 开始
+      log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Started<br>`);
+      // 我们创建一个新的 Promise：我们承诺在等待 3 秒后，兑现从 1 开始计数的数字
+      const p1 = new Promise((resolve, reject) => {
+        // 执行器函数被调用，并具有解决或拒绝该 Promise 的能力
+        log.insertAdjacentHTML(
+          "beforeend",
+          `${thisPromiseCount}) Promise constructor<br>`
+        );
+        // 这只是一个创建异步操作的示例
+        setTimeout(() => {
+          // We fulfill the promise
+          resolve(thisPromiseCount);
+        }, Math.random() * 2000 + 1000);
+      });
+
+      // 我们使用 then() 来定义 Promise 被解决时的操作，
+      // 并使用 catch() 来定义 Promise 被拒绝时的操作
+      p1.then((val) => {
+        // 打印兑现值
+        log.insertAdjacentHTML("beforeend", `${val}) Promise fulfilled<br>`);
+      }).catch((reason) => {
+        // 打印拒绝原因
+        console.log(`Handle rejected promise (${reason}) here.`);
+      });
+      // 结束
+      log.insertAdjacentHTML(
+        "beforeend",
+        `${thisPromiseCount}) Promise made<br>`
+      );
+    }
+
+    const btn = document.getElementById("make-promise");
+    btn.addEventListener("click", testPromise);
+  </script>
+</html>
