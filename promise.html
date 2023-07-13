@@ -12,32 +12,93 @@
     div {
       width: 500px;
       height: 600px;
-      background: #f857a6; /* fallback for old browsers */
-      background: -webkit-linear-gradient(
-        to right,
-        #ff5858,
-        #f857a6,
-        #f09819,
-        #edde5d
-      ); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(
-        to right,
-        #ff5858,
-        #f857a6,
-        #f09819,
-        #edde5d
-      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       position: absolute;
+      border-radius: 49px;
+      background: linear-gradient(45deg, #d31717, #fa1c1c);
+      box-shadow: 13px -13px 25px #ad1313, -13px 13px 25px #ff2121;
     }
   </style>
   <body>
-    <div id="box">
-      <button id="make-promise">Make a promise!</button>
-      <div id="log"></div>
-    </div>
+    <div id="box"></div>
   </body>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
   <script>
+    var p = new Promise((resolve, reject) => {
+      resolve(123);
+      // reject();
+    });
+    console.dir(p);
+
+    // var p1 = new Promise(function (resolve, reject) {
+    //   setInterval(() => {
+    //     resolve(133);
+    //   }, 20000);
+    // });
+    // p1.then(function (rs) {
+    //   console.log(rs);
+    // });
+    // function getDataPromise(url) {
+    //   return new Promise((resolve, reject) => {
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.open("get", url);
+    //     xhr.onreadystatechange = function () {
+    //       if (this.readyState === 4) {
+    //         // 加载完成
+    //         const d = JSON.parse(xhr.responseText);
+    //         resolve(d);
+    //       }
+    //     };
+    //     xhr.send();
+    //   });
+    // }
+
+    //     console.log(1)await delay(3000)console.log(2)
+    // 这段程序先输出1，等待3秒，在输出2实现delay
+    // 延迟指定的时间（以毫秒为单位）
+    // function delay(ms) {
+    //   return new Promise((resolve) => {
+    //     setTimeout(resolve, ms);
+    //   });
+    // }
+    // async function myFunction() {
+    //   console.log(1);
+    //   await delay(5000);
+    //   console.log(2);
+    // }
+    // myFunction();
+    // function delay(ms) {
+    //   return new Promise((resolve) => {
+    //     setTimeout(resolve, ms);
+    //   });
+    // }
+
+    // async function myFunction() {
+    //   console.log(1);
+    //   await delay(3000);
+    //   console.log(2);
+    // }
+
+    // myFunction();
+
+    // new Promise((resolve, reject) => {
+    //   //   resolve("success");
+    //   reject(new Error("请求失败"));
+    // }).then(
+    //   (msg) => {
+    //     console.log(msg);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    // let promise = new Promise((resolve, reject) => {
+    //   console.log("肯德基厨房开始做饭");
+    //   resolve("我是肯德基后厨，你的餐已好请来取餐");
+    // });
+    // promise.then((msg) => {
+    //   console.log(msg);
+    // });
+    // console.log(6666666666);
     // function interval(callback, delay = 100) {
     //   let id = setInterval(() => callback(id), delay);
     // }
@@ -76,46 +137,46 @@
     //     console.log(error);
     //   }
     // );
-    "use strict";
+    // "use strict";
 
-    let promiseCount = 0;
+    // let promiseCount = 0;
 
-    function testPromise() {
-      const thisPromiseCount = ++promiseCount;
-      const log = document.getElementById("log");
-      // 开始
-      log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Started<br>`);
-      // 我们创建一个新的 Promise：我们承诺在等待 3 秒后，兑现从 1 开始计数的数字
-      const p1 = new Promise((resolve, reject) => {
-        // 执行器函数被调用，并具有解决或拒绝该 Promise 的能力
-        log.insertAdjacentHTML(
-          "beforeend",
-          `${thisPromiseCount}) Promise constructor<br>`
-        );
-        // 这只是一个创建异步操作的示例
-        setTimeout(() => {
-          // We fulfill the promise
-          resolve(thisPromiseCount);
-        }, Math.random() * 2000 + 1000);
-      });
+    // function testPromise() {
+    //   const thisPromiseCount = ++promiseCount;
+    //   const log = document.getElementById("log");
+    //   // 开始
+    //   log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Started<br>`);
+    //   // 我们创建一个新的 Promise：我们承诺在等待 3 秒后，兑现从 1 开始计数的数字
+    //   const p1 = new Promise((resolve, reject) => {
+    //     // 执行器函数被调用，并具有解决或拒绝该 Promise 的能力
+    //     log.insertAdjacentHTML(
+    //       "beforeend",
+    //       `${thisPromiseCount}) Promise constructor<br>`
+    //     );
+    //     // 这只是一个创建异步操作的示例
+    //     setTimeout(() => {
+    //       // We fulfill the promise
+    //       resolve(thisPromiseCount);
+    //     }, Math.random() * 2000 + 1000);
+    //   });
 
-      // 我们使用 then() 来定义 Promise 被解决时的操作，
-      // 并使用 catch() 来定义 Promise 被拒绝时的操作
-      p1.then((val) => {
-        // 打印兑现值
-        log.insertAdjacentHTML("beforeend", `${val}) Promise fulfilled<br>`);
-      }).catch((reason) => {
-        // 打印拒绝原因
-        console.log(`Handle rejected promise (${reason}) here.`);
-      });
-      // 结束
-      log.insertAdjacentHTML(
-        "beforeend",
-        `${thisPromiseCount}) Promise made<br>`
-      );
-    }
+    //   // 我们使用 then() 来定义 Promise 被解决时的操作，
+    //   // 并使用 catch() 来定义 Promise 被拒绝时的操作
+    //   p1.then((val) => {
+    //     // 打印兑现值
+    //     log.insertAdjacentHTML("beforeend", `${val}) Promise fulfilled<br>`);
+    //   }).catch((reason) => {
+    //     // 打印拒绝原因
+    //     console.log(`Handle rejected promise (${reason}) here.`);
+    //   });
+    //   // 结束
+    //   log.insertAdjacentHTML(
+    //     "beforeend",
+    //     `${thisPromiseCount}) Promise made<br>`
+    //   );
+    // }
 
-    const btn = document.getElementById("make-promise");
-    btn.addEventListener("click", testPromise);
+    // const btn = document.getElementById("make-promise");
+    // btn.addEventListener("click", testPromise);
   </script>
 </html>
