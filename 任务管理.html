@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style>
+    #box {
+      width: 500px;
+      height: 600px;
+      border: 1px solid #ccc;
+    }
+  </style>
+  <body>
+    <div id="box"></div>
+    <picture>
+      <source
+        media="(min-width:1080px )"
+        srcset="
+          https://img1.baidu.com/it/u=1919509102,1927615551&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1689440400&t=4e08ff2573c12f3b53a01a42bea579fb
+        " />
+      <source
+        media="(min-width:768px )"
+        srcset="
+          https://img2.baidu.com/it/u=330790415,787800967&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281
+        " />
+      <source
+        media="(min-width:480px )"
+        srcset="
+          https://img1.baidu.com/it/u=1458656822,2078909008&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1689440400&t=989ed0e9f10fab523ceb5e753ad3735b
+        " />
+      <img
+        src="https://img2.baidu.com/it/u=330790415,787800967&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281"
+        alt="" />
+    </picture>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script>
+    // console.log("jjjjjjjj");
+    setInterval(() => {
+      $("#box").css(
+        "background-image",
+        "URL(https://img1.baidu.com/it/u=3549522664,2004387788&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800)"
+      );
+    }, 1000);
+    // console.log("今天是个好日子");
+  </script>
+</html>
