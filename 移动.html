@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>demo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+ 
+        body,
+        html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+ 
+        .container {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto;
+            border: 1px solid #e5e5e5;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            background-color: #fdfbfb;
+        }
+ 
+        a {
+            text-decoration: none;
+        }
+ 
+        .navbar {
+            background: #0dc7c7;
+            text-align: center;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            height: 2.5em;
+            z-index: 999;
+            line-height: 2.5em;
+            top: 0;
+            max-width: 450px;
+        }
+ 
+        .weui-tab {
+            position: relative;
+            height: 100%;
+        }
+ 
+        .weui-tab__bd {
+            box-sizing: border-box;
+            height: 100%;
+            padding-bottom: 50px;
+        }
+ 
+        .weui-tab__bd .weui-tab__bd-item {
+            display: none;
+            height: 100%;
+            overflow: auto;
+        }
+ 
+        .weui-tab__bd .weui-tab__bd-item.weui-tab__bd-item--active {
+            display: block;
+        }
+ 
+        .weui-tabbar {
+            position: fixed;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            position: absolute;
+            z-index: 500;
+            bottom: 0;
+            width: 100%;
+            /* background-color: #f7f7fa; */
+            background-color: #ededed;
+        }
+ 
+        .weui-tabbar:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 1px;
+            border-top: 1px solid #c0bfc4;
+            color: #c0bfc4;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+        }
+ 
+        .weui-tabbar__item {
+            padding: 0;
+            position: relative;
+            display: block;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            font-size: 0;
+            color: #999;
+            text-align: center;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+ 
+        .weui-tabbar__label {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            height: 3rem;
+            line-height: 3rem;
+        }
+ 
+        .weui-tabbar__item.weui-bar__item--on .weui-tabbar__label {
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+            color: #0dc7c7;
+        }
+ 
+        .weui-tab .weui-tab__bd .weui-cells__title {
+            padding-left: 15px;
+            color: #999;
+            font-size: 14px;
+            padding-top: 10px;
+        }
+ 
+        .weui-select {
+            -webkit-appearance: none;
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+            width: 100%;
+            font-size: inherit;
+            height: 45px;
+            line-height: 45px;
+            position: relative;
+            z-index: 1;
+            padding-left: 15px;
+            height: 42px;
+            padding-right: 30px;
+        }
+ 
+        .weui-cell_select .weui-cell__bd:after {
+            content: " ";
+            display: inline-block;
+            height: 6px;
+            width: 6px;
+            border-width: 2px 2px 0 0;
+            border-color: #c8c8cd;
+            border-style: solid;
+            -webkit-transform: matrix(.71, .71, -.71, .71, 0, 0);
+            transform: matrix(.71, .71, -.71, .71, 0, 0);
+            position: relative;
+            top: -2px;
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            margin-top: -4px;
+        }
+ 
+        .weui-loadmore {
+            width: 65%;
+            margin: 1.5em auto;
+            line-height: 1.6em;
+            font-size: 14px;
+            text-align: center;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 12em;
+        }
+ 
+        .weui-loadmore_line .weui-loadmore__tips {
+            position: relative;
+            top: -0.9em;
+            padding: 0 0.55em;
+            background-color: #fff;
+            color: #999;
+            display: inline-block;
+            vertical-align: middle;
+        }
+ 
+        .weui-cell {
+            padding: 10px 15px;
+            position: relative;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            padding: 0;
+        }
+ 
+        .weui-cell:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 15px;
+            height: 1px;
+            border-top: 1px solid #e5e5e5;
+            color: #e5e5e5;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            left: 15px;
+            z-index: 2;
+        }
+ 
+        .weui-media-box__title {
+            font-weight: 400;
+            font-size: 17px;
+            width: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            word-wrap: break-word;
+            word-break: break-all;
+            font-size: 16px;
+        }
+ 
+        .weui-cells {
+            margin-top: 1.17647059em;
+            /* background-color: #fff; */
+            line-height: 1.47058824;
+            font-size: 17px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 2.5rem;
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+            max-width: 446px;
+            background-color: #fdfbfb;
+        }
+ 
+        .weui-cells:before {
+            top: 0;
+            border-top: 1px solid #e5e5e5;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+        }
+ 
+        .weui-cells:after,
+        .weui-cells:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            color: #e5e5e5;
+            z-index: 2;
+        }
+ 
+        .weui-flex {
+            display: flex;
+        }
+ 
+        .weui-flex__item {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+ 
+        .weui-cell__bd {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+ 
+        #InputInterfaceList {
+            margin-top: 120px;
+        }
+ 
+        .padding2 {
+            padding: 6px 15px;
+        }
+ 
+        .weui-btn {
+            position: relative;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 14px;
+            padding-right: 14px;
+            box-sizing: border-box;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            line-height: 2.55555556;
+            border-radius: 5px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            overflow: hidden;
+            display: inline-block;
+            padding: 0 1.32em;
+            line-height: 2.3;
+            font-size: 13px;
+            color: #0dc7c7;
+            border: 1px solid #0dc7c7;
+            background-color: transparent;
+            cursor: pointer;
+        }
+ 
+        .weui-btn:hover {
+            color: #fff;
+            background-color: #0dc7c7;
+        }
+ 
+        #secenList {
+            margin-top: 120px;
+        }
+ 
+        .weui-media-box__desc {
+            color: #999999;
+            font-size: 13px;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+ 
+        .status-light {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+ 
+        .alert-tips {
+            display: inline-block;
+            position: absolute;
+            z-index: 888;
+            top: 35%;
+            right: 50%;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: rgb(138, 109, 59);
+            background-color: rgb(252, 248, 227);
+            border-color: rgb(250, 235, 204);
+            /* transition: all 3s ease 0s; */
+            margin-right: -80px;
+            width: 120px;
+        }
+ 
+        .info_css {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1
+        }
+ 
+        .danger_css {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+ 
+        .success_css {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+ 
+        .warning_css {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div class="container">
+        <div class="navbar">
+            <span id="navbarTit">页面一</span>
+        </div>
+        <div class="weui-tab">
+            <div class="weui-tab__bd">
+                <div id="pageOneTab" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-cells">
+                        <div class="weui-flex">
+                            <div class="weui-flex__item">
+                                <div class="weui-cell weui-cell_select">
+                                    <div class="weui-cell__bd">
+                                        <select class="weui-select" name="wgroupId" id="wgroupId"
+                                            onchange="wgroupSelectChange(this)">
+                                            <option value="1">下拉框1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weui-flex__item">
+                                <div class="weui-cell weui-cell_select">
+                                    <div class="weui-cell__bd">
+                                        <select class="weui-select" name="select2" id="pageOneList"
+                                            onchange="pageOneListSelect(this)">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-cells__title">数据列表：</div>
+                    </div>
+                    <div id="InputInterfaceList">
+                        <div class="weui-loadmore weui-loadmore_line">
+                            <span class="weui-loadmore__tips">请登录</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="pageTwoTab" class="weui-tab__bd-item">
+                    <div class="weui-cells">
+                        <div class="weui-cell weui-cell_select">
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="sgroupId" id="sgroupId"
+                                    onchange="sgroupSelectChange(this)">
+                                    <option value="1">下拉框1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="weui-flex">
+                            <div class="weui-flex__item">
+                                <div class="weui-cells__title">数据列表：</div>
+                            </div>
+                            <div class="weui-flex__item" style="text-align: end;padding-right: 30px;">
+                                <div class="weui-cells__title">默认序号：<span id="defaltpageTwo">1</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="secenList">
+                        <div class="weui-loadmore weui-loadmore_line">
+                            <span class="weui-loadmore__tips">请登录</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-tabbar">
+                <a href="#" class="weui-tabbar__item weui-bar__item--on" id="pageOneTabbar" onclick="pageOneInit(this)"
+                    style="border-right: 1px solid #c0bfc4;">
+                    <p class="weui-tabbar__label">页面一</p>
+                </a>
+                <a href="#" class="weui-tabbar__item" id="pageTwoTabbar" onclick="pageTwoInit(this)">
+                    <p class="weui-tabbar__label">页面二</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+ 
+</html>
+<script>
+    // let FileIP = document.domain;
+    let pid = 1;//当前组
+    let pageOneList = [];
+    let curWinId = "";
+    let inputCardPortList = [];
+    let devicepageTwoLists = [];
+    let tabbar = document.getElementsByClassName("weui-tabbar__item");
+    let pageOneTabbar = document.getElementById("pageOneTabbar");
+    let pageTwoTabbar = document.getElementById("pageTwoTabbar");
+    let navbarTit = document.getElementById("navbarTit");
+    let pageOneTab = document.getElementById("pageOneTab");
+    let pageTwoTab = document.getElementById("pageTwoTab");
+    let pageOneSelectView = document.getElementById("pageOneList");
+    let InputInterfaceListView = document.getElementById("InputInterfaceList");
+    let wgroupSelect = document.getElementById("wgroupId");
+    let sgroupSelect = document.getElementById("sgroupId");
+    let gSelectList = [];
+    let secenListView = document.getElementById("secenList");
+ 
+    window.onload = function () {
+        getUgList();
+        pageOneInit();
+    };
+ 
+    function getUgList() {
+        gSelectList.length = 0;
+        for (var i = 0; i < 3; i++) {
+            gSelectList.push(i + 1);
+        }
+        updateGroupSelect();
+    }
+ 
+    //页面一初始化
+    function pageOneInit(e) {
+        navbarTit.innerText = "页面一";
+        pageOneTabbar.className = "weui-tabbar__item weui-bar__item--on";
+        pageTwoTabbar.className = "weui-tabbar__item";
+        pageOneTab.style.display = "block";
+        pageTwoTab.style.display = "none";
+        getpageOneDatas();
+        updateSelectWin();
+        getInputCardData();
+        if (wgroupSelect.value != pid) {
+            wgroupSelect.value = pid;
+            wgroupSelectChange(wgroupSelect);
+        }
+        curWinId = "";
+    }
+ 
+    //页面二初始化
+    function pageTwoInit(e) {
+        navbarTit.innerText = "页面二";
+        pageTwoTabbar.className = "weui-tabbar__item weui-bar__item--on";
+        pageOneTabbar.className = "weui-tabbar__item";
+        pageOneTab.style.display = "none";
+        pageTwoTab.style.display = "block";
+        initDevicepageTwo();
+        updatepageTwoView();
+        if (sgroupSelect.value != pid) {
+            sgroupSelect.value = pid;
+            sgroupSelectChange(wgroupSelect);
+        }
+    }
+ 
+    function updateGroupSelect() {
+        wgroupSelect.innerHTML = "";
+        sgroupSelect.innerHTML = "";
+        let ht = "";
+        for (var i = 0; i < gSelectList.length; i++) {
+            var optionScreen = "<option value='" + gSelectList[i] + "'>" + "选项 " + gSelectList[i] + "</option>";
+            ht += optionScreen;
+        }
+        wgroupSelect.innerHTML = ht;
+        sgroupSelect.innerHTML = ht;
+    }
+ 
+    function wgroupSelectChange(e) {
+        pid = parseInt(e.value);
+        getpageOneDatas();
+        updateSelectWin();
+        curWinId = 0;
+    }
+ 
+    function sgroupSelectChange(e) {
+        pid = parseInt(e.value);
+        initDevicepageTwo();
+        updatepageTwoView();
+    }
+ 
+    function getpageOneDatas() {
+        pageOneList = [];
+        // var out = [3, 2, 1 ,3];
+        // out.shift();
+        // out.sort(sortNumber);//从小到大排序
+        let out = [{ "id": 1, "pid": 1, "type": 1 }, { "id": 2, "pid": 2, "type": 3 }, { "id": 3, "pid": 2, "type": 2 }, { "id": 4, "pid": 2, "type": 2 }, { "id": 5, "pid": 3, "type": 1 }];
+        if (out.length > 0) {
+            for (var i = 0; i < out.length; i++) {
+                var s = new MyWin();
+                s.id = out[i].id;
+                s.pid = out[i].pid;
+                s.type = out[i].type;
+                s.name = "子选项" + out[i].id + " (列表项" + out[i].type + ")";
+                pageOneList.push(s);
+            }
+        }
+    }
+ 
+    function updateSelectWin() {
+        let pageOneBypidList;
+        pageOneSelectView.innerHTML = "";
+        var optionScreen = document.createElement('option');
+        optionScreen.value = 0;
+        optionScreen.innerText = "请选择";
+        pageOneSelectView.appendChild(optionScreen);
+        pageOneBypidList = pageOneList.filter(function (item) {
+            return item.pid == pid;
+        });
+ 
+        for (var i = 0; i < pageOneBypidList.length; i++) {
+            var elem_option = document.createElement('option');
+            elem_option.value = pageOneBypidList[i].id;
+            elem_option.innerText = pageOneBypidList[i].name;
+            pageOneSelectView.appendChild(elem_option);
+        }
+    }
+ 
+    function pageOneListSelect(e) {
+        if (e.value == 0) {
+            curWinId = 0;
+            return false;
+        } else {
+            curWinId = parseInt(e.value);
+        }
+    }
+ 
+    function getInputCardData() {
+        let out1 = [{ "status": 0, "remark": "备注1", "type": 1 }, { "status": 7, "remark": "", "type": 2 }, { "status": 0, "remark": "备注2", "type": 3 }, { "status": 0, "remark": "", "type": 4 }];
+        InputInterfaceListView.innerHTML = "";
+        inputCardPortList.length = 0;
+        var id = 0;
+        if (out1.length > 0) {
+            for (var i = 0; i < out1.length; i++) {
+                id++;
+                var svp = new vp();
+                svp.id = id;
+                svp.type = out1[i].type;
+                svp.status = out1[i].status;
+                svp.name = "列表项" + id;
+                let r = out1[i].remark;
+                if (!r) {
+                    svp.remark = "暂无备注";
+                } else {
+                    svp.remark = r;
+                }
+                inputCardPortList.push(svp);
+                let bg = svp.status != 7 ? "red" : "green";
+                var html_l = "           <div class='weui-cell padding2' curType='" + svp.type + "' id='inputCard" + svp.id + "' onclick='changepageOneSrc(event)'>" +
+                    "                    <div class='weui-cell__bd'>" +
+                    "                        <h4 class='weui-media-box__title'>" + svp.name + "</h4>" +
+                    "                        <p class='weui-media-box__desc' style='display: table-cell;'><span class=\"status-light\" style='background:" + bg + "'></span>" + svp.remark + "</p>" +
+                    "                    </div>" +
+                    "                    <div class='weui-cell__ft'>" +
+                    "                        <button class='weui-btn'>设置</button>" +
+                    "                    </div>" +
+                    "                    </div>" +
+                    "                </div>";
+                InputInterfaceListView.innerHTML += html_l;
+            }
+        } else {
+            var noData = " <div class='weui-loadmore weui-loadmore_line'><span class='weui-loadmore__tips'>暂无数据</span></div>";
+            InputInterfaceListView.innerHTML = noData;
+        }
+    }
+    //加载页面二列表
+    function initDevicepageTwo() {
+        devicepageTwoLists = [];
+        let data = [{ "id": 1, "name": "11", "pid": 1 }, { "id": 2, "name": "", "pid": 2 }, { "id": 3, "name": "33", "pid": 2 }];
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            let pageTwoInfoTemp = new pageTwoInfo(item.id, item.name, item.pid);
+            devicepageTwoLists.push(pageTwoInfoTemp);
+        }
+    }
+    //更新页面二列表视图
+    function updatepageTwoView() {
+        secenListView.innerHTML = "";
+        let list = devicepageTwoLists.filter(function (item) {
+            return item.pid == pid;
+        })
+        if (list.length > 0) {
+            for (let i = 0; i < list.length; i++) {
+                let sname = "数据" + list[i].id;
+                let l_HTML = "         <div class='weui-cell padding2' id='pageTwo" + list[i].id + "' onclick='changepageTwo(event)'>" +
+                    "                    <div class='weui-cell__bd'>" +
+                    "                        <h4 class='weui-media-box__title'>" + sname + "</h4>" +
+                    "                        <p class='weui-media-box__desc' style='display: table-cell;'>" + list[i].name + "</p>" +
+                    "                    </div>" +
+                    "                    <div class='weui-cell__ft'>" +
+                    "                        <button href='javascript:;' class='weui-btn' class='show-actions'>设置</button>" +
+                    "                    </div>" +
+                    "                </div>";
+                secenListView.innerHTML += l_HTML;
+            }
+        } else {
+            let noData = "<div class='weui-loadmore weui-loadmore_line'>" +
+                "                    <span class='weui-loadmore__tips'>暂无数据</span>" +
+                "                </div>";
+            secenListView.innerHTML += noData;
+        }
+    }
+ 
+    function changepageOneSrc(event) {
+        var n = event.currentTarget.id.replace(/[^0-9]/ig, "");
+        clickType = event.currentTarget.getAttribute("type");
+        let children = InputInterfaceListView.childNodes;
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].nodeType === 1) {
+                children[i].style.background = "#fff";
+            }
+        }
+        event.currentTarget.style.background = "#c9fffd";
+        if (event.target.className === "weui-btn") {
+            if (curWinId == 0 || curWinId == undefined) {
+                alertTips('请先选择再进行操作!）', 'warning');
+                return;
+            }
+            var sub = pageOneList.filter(function (item) {
+                return item.id === curWinId;
+            });
+            sub = sub[0];
+            var vp = inputCardPortList.filter(function (item) {
+                return item.id == n;
+            });
+            vp = vp[0];
+            if (vp.type !== sub.type) {
+                alertTips("子选项" + (curWinId) + "切换为:" + vp.name, 'success');
+                for (var i = 0; i < pageOneList.length; i++) {
+                    if (pageOneList[i].id == curWinId) {
+                        pageOneList[i].inslot = vp.slot;
+                        pageOneList[i].inport = vp.port;
+                        pageOneList[i].name = "子选项" + curWinId + " (" + vp.type + ")";
+                        pageOneList[i].intype = vp.type;
+                    }
+                }
+                let index = pageOneSelectView.selectedIndex;
+                pageOneSelectView.options[index].text = "子选项" + curWinId + " (" + vp.name + ")";
+            } else {
+                alertTips("子选项" + curWinId + "当前已为" + vp.name, 'warning');
+            }
+        }
+    }
+    var curpageTwoId;//点击当前id
+    function changepageTwo(event) {
+        curpageTwoId = event.currentTarget.id.replace(/[^0-9]/ig, "");
+        let children = secenListView.childNodes;
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].nodeType === 1) {
+                children[i].style.background = "#fff";
+            }
+        }
+        event.currentTarget.style.background = "#c9fffd";
+        if (event.target.className === "weui-btn") {
+            alertTips("设置" + curpageTwoId, "success");
+        }
+    }
+ 
+    function pageTwoInfo(id, name, pid) {
+        var that = this;
+        this.id = id;
+        this.name = name;
+        this.pid = pid;
+    }
+ 
+    function MyWin(name, id, type, pid) {
+        this.name = name;
+        this.id = id;
+        this.pid = pid;
+        this.type = type;
+    }
+    function vp(name, remark, type, id, status) {
+        this.name = name;
+        this.remark = remark;
+        this.id = id;
+        this.type = type;
+        this.status = status;
+    }
+ 
+    //自定义弹框
+    function alertTips(str, status) {
+        let add_alert = window.document.createElement("span");
+        add_alert.innerText = str;
+        add_alert.className = "alert-tips";
+        if (status === 'success') {
+            add_alert.className += ' success_css';
+        } else if (status === 'info') {
+            add_alert.className += ' info_css';
+        } else if (status === 'danger') {
+            add_alert.className += ' danger_css';
+        } else if (status === 'warning') {
+            add_alert.className += ' warning_css';
+        }
+        document.body.appendChild(add_alert);
+        setTimeout(() => {
+            let index = 10;
+            let interval = setInterval(function () {
+                if (index === 0) {
+                    clearInterval(interval);
+                    add_alert.remove();
+                }
+                add_alert.style.opacity = index / 10;
+                console.log('===>', index);
+                index--;
+            }, 50)
+        }, 1000);
+    }
+ 
+    function sortNumber(a, b) {
+        return a > b ? 1 : -1
+    }
+    
+</script>
