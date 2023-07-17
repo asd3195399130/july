@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style>
+    .fighter-jet {
+      width: 200px;
+      height: 60px;
+      position: relative;
+      background-color: gray;
+      margin: 100px auto;
+    }
+
+    .fighter-jet::before,
+    .fighter-jet::after {
+      content: "";
+      position: absolute;
+      background-color: gray;
+    }
+
+    .fighter-jet::before {
+      width: 100px;
+      height: 30px;
+      top: -30px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .fighter-jet::after {
+      width: 30px;
+      height: 30px;
+      top: -15px;
+      right: -15px;
+      border-radius: 50%;
+    }
+  </style>
+  <body>
+    <div class="fighter-jet"></div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script></script>
+</html>
