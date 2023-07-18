@@ -63,3 +63,29 @@
 
 // console.log(person1.name); // 输出: "John"
 // console.log(person1.age); // 输出: 25
+// for (var i = 0; i < 5; i++) {
+//   setTimeout(function () {
+//     console.log(i);
+//   }, 1000);
+// }
+function A() {
+  console.log(1);
+}
+function Func() {
+  A = function () {
+    console.log(2);
+  };
+  return this;
+}
+Func.A = A;
+Func.prototype = {
+  A: () => {
+    console.log(3);
+  },
+};
+A();
+Func.A();
+Func().A();
+new FuncA();
+new Func().A();
+new new Func().A();
