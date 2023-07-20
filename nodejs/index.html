@@ -130,7 +130,8 @@
       Last Name: <input type="text" name="Password" />
       <input type="submit" value="Submit" />
     </form> -->
-    <form class="form" action="http://127.0.0.1:8081/packUser" method="post">
+    <!-- action="http://127.0.0.1:8080/packUser" method="post" -->
+    <form class="form" action="http://127.0.0.1:8080/login_post" method="post">
       <div class="flex-column">
         <label>Email </label>
       </div>
@@ -149,7 +150,8 @@
           placeholder="请输入账户"
           class="input"
           type="text"
-          name="Username" />
+          name="Username"
+          value="" />
       </div>
 
       <div class="flex-column">
@@ -170,7 +172,8 @@
           placeholder="请输入密码"
           class="input"
           type="password"
-          name="password" />
+          name="password"
+          value="" />
       </div>
 
       <div class="flex-row">
@@ -250,18 +253,21 @@
   </body>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
   <script>
-    require("http://127.0.0.1:8081/packUser");
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" }, // required by fetch() call.
-      body: JSON.stringify(data),
-    })
-      .then((Response) => Response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // $(function () {
+    //   $("form").submit(function () {
+    //     $.ajax({
+    //       url: "http://127.0.0.1:8080/packUser",
+    //       type: "POST",
+    //       dataType: "JSON",
+    //       data: {
+    //         Username: $("input[name='Username']").val(),
+    //         password: $("input[name='password']").val(),
+    //       },
+    //       success: function (data) {
+    //         console.log(data);
+    //       },
+    //     });
+    //   });
+    // });
   </script>
 </html>
