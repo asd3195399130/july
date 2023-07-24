@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style>
+    @keyframes countdown {
+      from {
+        transform: rotate(-90deg);
+      }
+      to {
+        transform: rotate(270deg);
+      }
+    }
+    .countdown-ring {
+      position: relative;
+      height: 120px;
+      width: 120px;
+      margin: 0 auto;
+    }
+    .countdown-ring__fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      clip: rect(0, 60px, 120px, 0);
+      background-color: #fe4100;
+      animation: countdown 60s linear both;
+    }
+    .countdown-ring__fill,
+    .countdown-ring__mask {
+      border: 6px solid #fff;
+    }
+    .countdown-ring__mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      clip: rect(0, 120px, 120px, 60px);
+    }
+    .countdown-ring__text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #333;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="countdown-ring">
+      <div class="countdown-ring__fill"></div>
+      <div class="countdown-ring__text"></div>
+      <div class="countdown-ring__mask"></div>
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script></script>
+</html>
