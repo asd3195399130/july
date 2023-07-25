@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+    <script src=""></script>
+  </head>
+  <style></style>
+  <body>
+    <div id="box">
+      <input type="text" name="" id="id" /><br />
+      <input type="text" id="name" /><br />
+      <input type="text" id="color" /><br />
+      <input type="submit" id="submit" value="提交" />
+      <input type="submit" id="del" value="删除" />
+      <input type="submit" value="更新" id="put" />
+    </div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+  <script>
+    $(function () {
+      $("#submit").click(function () {
+        $.ajax({
+          type: "post",
+          url: "http://127.0.0.1:3000/cars/addcar",
+          data: {
+            name: $("#name").val(),
+            color: $("#color").val(),
+          },
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+          }, //console log the data.
+        });
+      });
+      $("#del").click(function () {
+        $.ajax({
+          type: "delete",
+          url: "http://127.0.0.1:3000/cars/delcar",
+          data: { id: $("#id").val() },
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+          },
+        });
+      });
+      $("#put").click(function () {
+        $.ajax({
+          type: "put",
+          url: "http://127.0.0.1:3000/cars/upcars",
+          data: {
+            id: $("#id").val(),
+            name: $("#name").val(),
+          },
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+          },
+        });
+      });
+    });
+  </script>
+</html>
