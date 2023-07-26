@@ -8,7 +8,25 @@
     <link rel="stylesheet" href="" />
     <script src=""></script>
   </head>
-  <style></style>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 1200px;
+      text-align: center;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
   <body>
     <div id="box">
       <input type="text" name="" id="id" /><br />
@@ -18,10 +36,29 @@
       <input type="submit" id="del" value="删除" />
       <input type="submit" value="更新" id="put" />
     </div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>汽车名字</th>
+          <th>汽车颜色</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </body>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
   <script>
     $(function () {
+      $.ajax({
+        type: "get",
+        url: "http://127.0.0.1:3000/cars",
+        dataType: "json",
+        success: function (data) {
+          fun(data);
+        },
+      });
       $("#submit").click(function () {
         $.ajax({
           type: "post",
@@ -32,7 +69,7 @@
           },
           dataType: "json",
           success: function (data) {
-            console.log(data);
+            fun(data);
           }, //console log the data.
         });
       });
@@ -54,6 +91,7 @@
           data: {
             id: $("#id").val(),
             name: $("#name").val(),
+            color: $("#color").val(),
           },
           dataType: "json",
           success: function (data) {
@@ -61,6 +99,21 @@
           },
         });
       });
+      function fun(data) {
+        console.log(data);
+        let html = "";
+        data.data.forEach((index, item) => {
+          html += `
+        <tr>
+          <td>${index.id}</td>
+          <td>${index.name}</td>
+          <td>${index.color}</td>
+          <td>${index.time}</td>
+        </tr>
+            `;
+        });
+        $("tbody").html(html);
+      }
     });
   </script>
 </html>
